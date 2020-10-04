@@ -1,0 +1,83 @@
+<html>
+  <head>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/0.11.10/vue.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    
+    <div id="maths-app">
+        <table>
+        <tr>
+            <td>Input Minimum {{ inputRangeMin }}</td>
+            <td><input type="number" id="input-range-min" v-model="inputRangeMin"></td>
+        </tr>
+        <tr>
+            <td>Input Maximum {{ inputRangeMax }}</td>
+            <td><input type="number" id="input-range-max" v-model="inputRangeMax"></td>
+        </tr>
+        <tr>
+            <td>Output Minimum {{ outputRangeMin }}</td>
+            <td><input type="number" id="output-range-min" v-model="outputRangeMin"></td>
+        </tr>
+        <tr>
+            <td>Output Maximum {{ outputRangeMax }}</td>
+            <td><input type="number" id="output-range-max" v-model="outputRangeMax"></td>
+        </tr>
+     </table>
+     <hr/>
+     <hr/>
+     Total problems: {{ additionList.length }}
+     <table style="border-width: 1px;">
+         <tr v-for="row in additionList" :key="row.index">
+            <td>{{ row.x }}</td>
+            <td>+</td>
+            <td>{{ row.y }}</td>
+            <td>=</td>
+            <td>{{ row.ans}}</td>
+         </tr>
+     </table>
+    </div>
+    
+    <script>
+      
+      new Vue({
+        el: '#maths-app',
+        data: {
+            inputRangeMin: 0,
+            inputRangeMax: 10,
+            outputRangeMin: 0,
+            outputRangeMax: 10
+        },
+        computed: {
+            additionList: function () {
+                var addList = [];
+                var x, y, index = 0;
+                for(x=this.inputRangeMin; x <= this.inputRangeMax; x++) {
+                    for(y=this.inputRangeMin; y <= this.inputRangeMax; y++) {
+
+                        
+                        
+                        if (x + y >= this.outputRangeMin && x + y <= this.outputRangeMax) {
+                            addList.push({'x': x, 'y': y, 'ans': x + y, 'index': index});
+                            index++;
+                        }
+                    }
+                }
+                return addList;
+            }
+        }
+      });
+      
+    </script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+        td {
+            width: 3rem;
+            text-align: center;
+        }
+    </style>
+    
+  </body>
+</html>
